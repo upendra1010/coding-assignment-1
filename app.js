@@ -60,6 +60,9 @@ const hasCategoryProperty = (requestQuery) => {
 const hasDueDateProperty = (requestQuery) => {
   return requestQuery.dueDate !== undefined;
 };
+const hasSearchProperty = (requestQuery) => {
+  return requestQuery.search_q !== undefined;
+};
 
 const isValidTodoPriority = (item) => {
   if (item === "HIGH" || item === "MEDIUM" || item === "LOW") {
@@ -314,7 +317,7 @@ app.post("/todos/", async (request, response) => {
   }
 });
 
-app.get("/todos/:todoId/", async (request, response) => {
+app.put("/todos/:todoId/", async (request, response) => {
   const { todoId } = request.params;
   const todoDetails = request.body;
   const { todo, priority, status, dueDate, category } = todoDetails;
